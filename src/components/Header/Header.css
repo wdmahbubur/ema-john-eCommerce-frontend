@@ -1,0 +1,29 @@
+.logo {
+    text-align: center;
+}
+.logo img {
+    width: 300px;
+}
+nav {
+    background-color: #000;
+}
+.navbar {
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+.nav-item {
+    margin: 0 5px;
+}
+.nav-link {
+    display: inline-flex;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+}
+.nav-link:hover {
+    background-color: #fff;
+    color: rgb(26, 29, 245);
+}
