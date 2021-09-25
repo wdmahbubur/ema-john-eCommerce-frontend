@@ -53,7 +53,7 @@ const Shop = () => {
         <div>
             <div className="search-bar">
                 <form>
-                    <input type="text" className="search-input" onChange={handleSearchProduct} />
+                    <input type="text" className="search-input" onChange={handleSearchProduct} placeholder="Search Your Product" />
                     <button type="button" className="search-btn"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></button>
                 </form>
                 <a href='/#' className="shopping-cart-icon"><FontAwesomeIcon icon={faShoppingCart} ></FontAwesomeIcon>
