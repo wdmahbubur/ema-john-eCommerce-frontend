@@ -1,47 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
-import Product from '../Products/Product';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './Shop.css';
-import { addToDb, getStoredCart } from '../../utilities/fakedb';
+import { addToDb } from '../../utilities/fakedb';
+import useProducts from '../hooks/useProducts/useProducts';
+import useCart from '../hooks/useCart/useCart';
+import { useHistory } from 'react-router';
+import Products from '../Products/Products';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const [products] = useProducts();
     const [displayProduct, setDisplayProduct] = useState([]);
+    const [cart, setCart] = useCart(products);
+
+    let history = useHistory();
 
     useEffect(() => {
-        fetch('./products.JSON')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data);
-                setDisplayProduct(data);
-            })
-    }, []);
+        setDisplayProduct(products);
+    }, [products]);
 
-    const [cart, setCart] = useState([]);
+
     const handleAddToCart = (product) => {
-        const newCart = [...cart, product];
+        const exists = cart.find(item => item.key === product.key);
+        let newCart = [];
+        if (exists) {
+            const existedCart = cart.filter(item => item.key !== exists.key);
+            exists.quantity += 1;
+            newCart = [...existedCart, exists];
+        }
+        else {
+            newCart = [...cart, product];
+        }
         setCart(newCart);
         addToDb(product.key);
     }
-
-    useEffect(() => {
-        if (products.length) {
-            const data = getStoredCart();
-            const storedData = [];
-            for (const key in data) {
-                const storageData = products.find(product => product.key === key);
-                if (storageData) {
-                    storageData.quantity = data[key];
-                    storedData.push(storageData)
-                }
-            }
-            setCart(storedData)
-        }
-
-    }, [products]);
 
     const handleSearchProduct = event => {
         const value = (event.target.value);
@@ -49,6 +43,9 @@ const Shop = () => {
         setDisplayProduct(matchedData);
     }
 
+    const handleReviewOrder = () => {
+        history.push('/order-review')
+    }
     return (
         <div>
             <div className="search-bar">
@@ -63,15 +60,17 @@ const Shop = () => {
             <div className="Shop">
                 <div className="products-group">
                     {
-                        displayProduct.map(product => <Product
+                        displayProduct.map(product => <Products
                             key={product.key}
                             product={product}
                             handleAddToCart={handleAddToCart}
-                        ></Product>)
+                        ></Products>)
                     }
                 </div>
                 <div>
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                        <button className="btn" style={{ width: '100%' }} onClick={handleReviewOrder}>Review Order</button>
+                    </Cart>
                 </div>
             </div>
         </div>
