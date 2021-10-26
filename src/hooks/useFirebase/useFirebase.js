@@ -22,7 +22,8 @@ const useFirebase = () => {
     }
     return {
         googleSignIn,
-        user
+        user,
+        error
     }
 
 }
