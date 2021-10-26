@@ -8,36 +8,44 @@ import Shop from './components/Shop/Shop';
 import NotFound from './components/NotFound/NotFound'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder';
 import Product from './components/Product/Product';
+import Login from './components/Login/Login';
+import AuthProvider from './components/AuthProvider/AuthProvider';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 function App() {
 
   return (
     <div>
-      <Router>
-        <Header></Header>
-        <Switch>
-          <Route exact path="/">
-            <Shop></Shop>
-          </Route>
-          <Route path="/shop">
-            <Shop></Shop>
-          </Route>
-          <Route path="/product/:productName">
-            <Product></Product>
-          </Route>
-          <Route path="/order-review">
-            <OrderReview></OrderReview>
-          </Route>
-          <Route path="/inventory">
-            <Inventory></Inventory>
-          </Route>
-          <Route path="/place-order">
-            <PlaceOrder></PlaceOrder>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Header></Header>
+          <Switch>
+            <Route exact path="/">
+              <Shop></Shop>
+            </Route>
+            <Route path="/shop">
+              <Shop></Shop>
+            </Route>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
+            <Route path="/product/:productName">
+              <Product></Product>
+            </Route>
+            <PrivateRoute path="/order-review">
+              <OrderReview></OrderReview>
+            </PrivateRoute>
+            <Route path="/inventory">
+              <Inventory></Inventory>
+            </Route>
+            <PrivateRoute path="/place-order">
+              <PlaceOrder></PlaceOrder>
+            </PrivateRoute>
+            <Route path="*">
+              <NotFound></NotFound>
+            </Route>
+          </Switch>
+        </Router>
+      </AuthProvider>
 
     </div>
   );

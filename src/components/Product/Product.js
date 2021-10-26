@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Rating from 'react-rating';
 import { useHistory, useParams } from 'react-router';
+import useCart from '../../hooks/useCart/useCart';
+import useProducts from '../../hooks/useProducts/useProducts';
 import { addToDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
-import useCart from '../hooks/useCart/useCart';
-import useProducts from '../hooks/useProducts/useProducts';
 import './Product.css';
 
 const Product = () => {

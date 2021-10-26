@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './Shop.css';
 import { addToDb } from '../../utilities/fakedb';
-import useProducts from '../hooks/useProducts/useProducts';
-import useCart from '../hooks/useCart/useCart';
 import { useHistory } from 'react-router';
 import Products from '../Products/Products';
+import useProducts from '../../hooks/useProducts/useProducts';
+import useCart from '../../hooks/useCart/useCart';
 
 const Shop = () => {
     const [products] = useProducts();
@@ -67,6 +67,7 @@ const Shop = () => {
                         ></Products>)
                     }
                 </div>
+
                 <div>
                     <Cart cart={cart}>
                         <button className="btn" style={{ width: '100%' }} onClick={handleReviewOrder}>Review Order</button>

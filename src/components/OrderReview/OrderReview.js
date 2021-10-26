@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import useCart from '../../hooks/useCart/useCart';
+import useProducts from '../../hooks/useProducts/useProducts';
 import { clearTheCart, deleteFromDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import CartItems from '../CartItems/CartItems';
-import useCart from '../hooks/useCart/useCart';
-import useProducts from '../hooks/useProducts/useProducts';
 
 const OrderReview = () => {
     const [products] = useProducts();
