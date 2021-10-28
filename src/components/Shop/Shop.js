@@ -11,9 +11,11 @@ import useProducts from '../../hooks/useProducts/useProducts';
 import useCart from '../../hooks/useCart/useCart';
 
 const Shop = () => {
-    const [products] = useProducts();
+    const [page, setPage] = useState(0);
+    const size = 10;
+    const { products, pageCount } = useProducts(page, size);
     const [displayProduct, setDisplayProduct] = useState([]);
-    const [cart, setCart] = useCart(products);
+    const [cart, setCart] = useCart();
 
     let history = useHistory();
 
@@ -58,15 +60,26 @@ const Shop = () => {
                 </a>
             </div>
             <div className="Shop">
-                <div className="products-group">
-                    {
-                        displayProduct.map(product => <Products
-                            key={product.key}
-                            product={product}
-                            handleAddToCart={handleAddToCart}
-                        ></Products>)
-                    }
+                <div>
+                    <div className="products-group">
+                        {
+                            displayProduct.map(product => <Products
+                                key={product.key}
+                                product={product}
+                                handleAddToCart={handleAddToCart}
+                            ></Products>)
+                        }
+                    </div>
+                    <div className="pagination">
+                        {
+                            [...Array(pageCount).keys()].map(pageNum => <button className={
+                                page === pageNum ? 'selected' : ''
+                            } key={pageNum} onClick={() => setPage(pageNum)}>{pageNum + 1}</button>)
+                        }
+                    </div>
                 </div>
+
+
 
                 <div>
                     <Cart cart={cart}>

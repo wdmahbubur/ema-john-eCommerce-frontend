@@ -10,7 +10,7 @@ import Cart from '../Cart/Cart';
 import './Product.css';
 
 const Product = () => {
-    const [products] = useProducts();
+    const { products } = useProducts();
     const [cart, setCart] = useCart(products);
     const { productName } = useParams();
     let history = useHistory();

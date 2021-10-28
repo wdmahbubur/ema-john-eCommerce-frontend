@@ -43,3 +43,18 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+.pagination {
+    margin: 10px 0;
+}
+.pagination button {
+    margin: 0 10px;
+    color: rgb(39, 92, 238);
+    cursor: pointer;
+    padding: 4px 8px;
+    border: 1px solid rgb(126, 126, 126);
+    border-radius: 2px;
+}
+.pagination .selected {
+    background-color: rgb(19, 83, 221);
+    color: #fff;
+}
